@@ -7,8 +7,15 @@
     }
 }
 
-// //tablet only
-@mixin for-narrow-only-layout {
+//tablet 
+@mixin for-narrow-layout {
+    @media (min-width:$mobile-breakpoint) {
+        @content;
+    }
+}
+
+//tablet only
+@mixin for-tablet-only-layout {
     @media (max-width: $normal-breakpoint) and (min-width:$mobile-breakpoint) {
         @content;
     }

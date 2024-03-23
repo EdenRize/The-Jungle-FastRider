@@ -1,0 +1,13 @@
+.page-layout {
+
+    .page-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-block: 40px;
+    }
+
+ @include for-narrow-layout {
+
+ }
+}

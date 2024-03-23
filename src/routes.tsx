@@ -7,6 +7,6 @@ function LazyLoadRoute(path:string) {
 export const routes = [
     {
         path: '/', 
-        element:LazyLoadRoute('./views/HomePage.tsx')
+        element:LazyLoadRoute('./views/RidesIndex.tsx')
     }
 ]

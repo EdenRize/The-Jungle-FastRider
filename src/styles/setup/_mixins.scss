@@ -1,0 +1,23 @@
+/* Breakpoint mixins */
+
+//mobile only
+@mixin for-mobile-only-layout {
+    @media (max-width: $mobile-breakpoint) {
+        @content;
+    }
+}
+
+// //tablet only
+@mixin for-narrow-only-layout {
+    @media (max-width: $normal-breakpoint) and (min-width:$mobile-breakpoint) {
+        @content;
+    }
+}
+
+
+//desktop
+@mixin for-normal-layout {
+    @media (min-width: $normal-breakpoint) {
+        @content;
+    }
+}

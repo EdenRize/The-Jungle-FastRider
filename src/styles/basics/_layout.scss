@@ -5,6 +5,10 @@
         flex-direction: column;
         align-items: center;
         margin-block: 40px;
+
+        .page-title {
+            margin-block-end: 40px;
+        }
     }
 
  @include for-narrow-layout {

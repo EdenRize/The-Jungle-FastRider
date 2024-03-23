@@ -3,10 +3,14 @@ body {
     background-color: $background;
     color: $text-secondary;
     margin: 0;
-    letter-spacing: 1.5px;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: $text-primary;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+p {
     margin: 0;
 }

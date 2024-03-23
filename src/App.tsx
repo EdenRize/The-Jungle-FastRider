@@ -2,8 +2,7 @@ import { Route, Routes } from "react-router"
 import './styles/main.scss'
 import {routes} from './routes'
 
-function App() {
-
+const App = () => {
   return (
     <section className="app">
         <Routes>

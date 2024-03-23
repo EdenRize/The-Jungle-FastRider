@@ -2,6 +2,7 @@ import { ChangeEventHandler, useState } from 'react'
 import { InfoIconItemProps } from '../cmps/info-icon/InfoIconItem'
 import InfoIconList from '../cmps/info-icon/InfoIconList'
 import InputBtn from '../cmps/InputBtn'
+import InfoCube from '../cmps/info-cube/InfoCube'
 
 const RidesIndex = () => {
   const [pin, setPin] = useState('')
@@ -40,6 +41,8 @@ const RidesIndex = () => {
           value={pin}
           placeholder="#PIN"
         />
+
+        <InfoCube color="red" children={<h1>helkofkosd</h1>} />
       </div>
     </section>
   )

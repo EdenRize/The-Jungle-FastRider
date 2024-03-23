@@ -1,0 +1,15 @@
+.info-cube {
+  position: relative;
+  width: 100%;
+  background-color: $primary;
+  padding: 10px;
+  box-sizing: border-box;
+
+  .top-color {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 6px;
+    width: 100%;
+  }
+}

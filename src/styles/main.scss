@@ -1,16 +1,17 @@
 // Setup
-@import "setup/typography";
-@import "setup/variables";
-@import "setup/mixins";
+@import 'setup/typography';
+@import 'setup/variables';
+@import 'setup/mixins';
 
 // Basics
-@import "basics/helpers";
-@import "basics/layout";
-@import "basics/base";
+@import 'basics/helpers';
+@import 'basics/layout';
+@import 'basics/base';
 
 //views
-@import "views/rides-index";
+@import 'views/rides-index';
 
 //cmps
-@import "cmps/info-icon-item";
-@import "cmps/info-icon-list";
+@import 'cmps/info-icon-item';
+@import 'cmps/info-icon-list';
+@import 'cmps/info-cube';

@@ -1,0 +1,27 @@
+.input-btn {
+  width: 100%;
+
+  input {
+    all: unset;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px 15px;
+    color: black;
+    box-sizing: border-box;
+  }
+
+  button {
+    all: unset;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+
+    color: $text-primary;
+    background-color: $secondary;
+    padding: 20px;
+    text-align: center;
+    z-index: 10;
+  }
+}

@@ -1,25 +1,20 @@
-import { FC, MouseEventHandler } from 'react'
+import { FC } from 'react'
 
 interface InfoCubeProps {
   children?: React.ReactNode
   color: string
   isHoverable?: boolean
-  onClick?: MouseEventHandler<HTMLElement>
 }
 
-const InfoCube: FC<InfoCubeProps> = ({
-  children,
-  color,
-  isHoverable,
-  onClick,
-}) => {
+const InfoCube: FC<InfoCubeProps> = ({ children, color, isHoverable }) => {
   return (
-    <section onClick={onClick} className="info-cube">
+    <section className="info-cube">
       <div
         style={{ backgroundColor: color }}
         className={`${isHoverable ? 'hoverable' : ''} top-color`}
       ></div>
-      {children}
+
+      <div className="cube-content">{children}</div>
     </section>
   )
 }

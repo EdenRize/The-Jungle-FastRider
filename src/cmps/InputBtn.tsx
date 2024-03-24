@@ -23,7 +23,7 @@ const InputBtn: FC<InputBtnProps> = ({
   }
 
   return (
-    <form onSubmit={onFormSubmit} className="pin-form">
+    <form onSubmit={onFormSubmit} className="input-btn">
       <input
         required
         type={type}

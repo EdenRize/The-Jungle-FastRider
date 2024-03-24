@@ -3,6 +3,7 @@ import { InfoIconItemProps } from '../cmps/info-icon/InfoIconItem'
 import InfoIconList from '../cmps/info-icon/InfoIconList'
 import InputBtn from '../cmps/InputBtn'
 import InfoCube from '../cmps/info-cube/InfoCube'
+import InfoCubeList, { infoCubeProp } from '../cmps/info-cube/InfoCubeList'
 
 const RidesIndex = () => {
   const [pin, setPin] = useState('')
@@ -20,6 +21,16 @@ const RidesIndex = () => {
       iconPath: 'src/assets/icons/clock.svg',
       text: 'When the time comes, use the special FastRider line to cut out a considerable wait time',
     },
+  ]
+
+  const infoCubes: infoCubeProp[] = [
+    { children: <h1>helkofkosd</h1>, color: 'red' },
+    { children: <h1>helkofkosd</h1>, color: 'red' },
+    { children: <h1>helkofkosd</h1>, color: 'red' },
+    { children: <h1>helkofkosd</h1>, color: 'red' },
+    { children: <h1>helkofkosd</h1>, color: 'red' },
+    { children: <h1>helkofkosd</h1>, color: 'red' },
+    { children: <h1>helkofkosd</h1>, color: 'red' },
   ]
 
   const onFormSubmit = (ev: React.FormEvent<HTMLFormElement>): void => {}
@@ -42,7 +53,7 @@ const RidesIndex = () => {
           placeholder="#PIN"
         />
 
-        <InfoCube color="red" children={<h1>helkofkosd</h1>} />
+        <InfoCubeList infoCubes={infoCubes} isHoverable={true} />
       </div>
     </section>
   )

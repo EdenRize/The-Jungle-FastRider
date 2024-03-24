@@ -2,23 +2,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  min-height: 100%;
   text-align: center;
-  padding: 10px;
   box-sizing: border-box;
+  padding: 10px;
 
   .zone-name {
     text-align: end;
     letter-spacing: 1.1px;
-    font-size: 14px;
+    margin-block-start: 4px;
   }
 
-  .booking-info {
-    font-size: 14px;
-
-    img {
-      width: 25px;
-      margin-inline-end: 3px;
-    }
+  .booking-info img {
+    width: 22px;
+    margin-inline-end: 3px;
   }
 }

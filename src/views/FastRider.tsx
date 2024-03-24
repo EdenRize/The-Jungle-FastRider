@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import RidesIndex from './RidesIndex'
 import { Ticket } from '../types/ticket-types'
+import TicketIndex from './TicketIndex'
 
 const FastRider = () => {
   const [ticket, setTicket] = useState<null | Ticket>(null)
@@ -14,7 +15,7 @@ const FastRider = () => {
       const ticketString = localStorage.getItem('ticket')
       if (!ticketString) {
         console.log('No ticket found in local storage')
-        return // No ticket found, no action needed
+        return
       }
 
       const ticket = JSON.parse(ticketString)
@@ -38,7 +39,11 @@ const FastRider = () => {
       <div className="page-content">
         <h1 className="page-title">The Jungle™ FastRider Service</h1>
 
-        <RidesIndex setTicket={setTicket} />
+        {ticket ? (
+          <TicketIndex ticket={ticket} />
+        ) : (
+          <RidesIndex setTicket={setTicket} />
+        )}
       </div>
     </section>
   )

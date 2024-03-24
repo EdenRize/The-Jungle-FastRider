@@ -1,14 +1,43 @@
-import { ChangeEventHandler, useState } from 'react'
+import { ChangeEventHandler, useEffect, useState } from 'react'
 import { InfoIconItemProps } from '../cmps/info-icon/InfoIconItem'
 import InfoIconList from '../cmps/info-icon/InfoIconList'
 import InputBtn from '../cmps/InputBtn'
 import InfoCubeList, { infoCubeProp } from '../cmps/info-cube/InfoCubeList'
-import { Ride } from '../types/ride-types'
 import RideInfo from '../cmps/info-cube/RideInfo'
+import { getRides } from '../services/ride-services'
+import { Ride } from '../types/ride-types'
 
 const RidesIndex = () => {
   const [pin, setPin] = useState<string>('')
+  const [rides, setRides] = useState<null | Ride[]>(null)
+  const [infoCubes, setInfoCubes] = useState<null | infoCubeProp[]>(null)
   const [selectedRide, setSelectedRide] = useState<null | number>(null)
+
+  useEffect(() => {
+    loadRides()
+  }, [])
+
+  useEffect(() => {
+    if (rides) updateInfoCubes(rides)
+  }, [rides, selectedRide])
+
+  const loadRides = async () => {
+    try {
+      const rides = await getRides()
+      setRides(rides)
+    } catch (err) {
+      console.log('err', err)
+    }
+  }
+
+  const updateInfoCubes = (rides: Ride[]) => {
+    const cubes = rides.map((ride) => ({
+      children: <RideInfo ride={ride} onClick={onRideClick} />,
+      color: ride.zone.color,
+      isSelected: selectedRide === ride.id,
+    }))
+    setInfoCubes(cubes)
+  }
 
   const infoIcons: InfoIconItemProps[] = [
     {
@@ -25,53 +54,6 @@ const RidesIndex = () => {
     },
   ]
 
-  const rides: Ride[] = [
-    {
-      id: 1,
-      zone: {
-        id: 0,
-        color: 'red',
-        name: 'Mandrill Town',
-      },
-      name: 'Big Town Hall Slides',
-      remaining_tickets: 22,
-      return_time: '2024-03-24T09:26:15.629Z',
-    },
-    {
-      id: 2,
-      zone: {
-        id: 0,
-        color: 'blue',
-        name: 'Mandrill Town',
-      },
-      name: 'Big Town Hall Slides',
-      remaining_tickets: 22,
-      return_time: '2024-03-24T09:26:15.629Z',
-    },
-    {
-      id: 3,
-      zone: {
-        id: 0,
-        color: 'yellow',
-        name: 'Mandrill Town',
-      },
-      name: 'Big Town Hall Slides',
-      remaining_tickets: 22,
-      return_time: '2024-03-24T09:26:15.629Z',
-    },
-    {
-      id: 4,
-      zone: {
-        id: 0,
-        color: 'green',
-        name: 'Mandrill Town',
-      },
-      name: 'Big Town Hall Slides',
-      remaining_tickets: 22,
-      return_time: '2024-03-24T09:26:15.629Z',
-    },
-  ]
-
   const onFormSubmit = (ev: React.FormEvent<HTMLFormElement>): void => {}
 
   const onPINChange: ChangeEventHandler<HTMLInputElement> = (ev) => {
@@ -81,12 +63,6 @@ const RidesIndex = () => {
   const onRideClick = (rideId: number) => {
     setSelectedRide((prevRide) => (prevRide === rideId ? null : rideId))
   }
-
-  const infoCubes: infoCubeProp[] = rides.map((ride) => ({
-    children: <RideInfo ride={ride} onClick={onRideClick} />,
-    color: ride.zone.color,
-    isSelected: selectedRide === ride.id,
-  }))
 
   return (
     <section className="page-layout rides-index">
@@ -102,7 +78,7 @@ const RidesIndex = () => {
           placeholder="#PIN"
         />
 
-        <InfoCubeList infoCubes={infoCubes} isHoverable={true} />
+        {infoCubes && <InfoCubeList infoCubes={infoCubes} isHoverable={true} />}
       </div>
     </section>
   )

@@ -1,21 +1,20 @@
-import { FC } from 'react';
+import { FC } from 'react'
 
 export interface InfoIconItemProps {
   iconPath: string
-  text: string
+  text: string | number
 }
 
-const InfoIconItem: FC<InfoIconItemProps> = ({iconPath, text}) => {
+const InfoIconItem: FC<InfoIconItemProps> = ({ iconPath, text }) => {
   return (
-    <section className='info-icon-item'>
+    <section className="info-icon-item">
+      <div className="icon-container">
+        <img src={iconPath} />
+      </div>
 
-        <div className="icon-container">
-            <img src={iconPath}/>
-        </div>
-
-        <p>{text}</p>
+      <p>{text}</p>
     </section>
-  );
-};
+  )
+}
 
-export default InfoIconItem;
+export default InfoIconItem

@@ -1,0 +1,22 @@
+.ride-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  text-align: center;
+
+  .zone-name {
+    text-align: end;
+    letter-spacing: 1.1px;
+    font-size: 14px;
+  }
+
+  .booking-info {
+    font-size: 14px;
+
+    img {
+      width: 25px;
+      margin-inline-end: 3px;
+    }
+  }
+}

@@ -2,8 +2,9 @@ import { ChangeEventHandler, useState } from 'react'
 import { InfoIconItemProps } from '../cmps/info-icon/InfoIconItem'
 import InfoIconList from '../cmps/info-icon/InfoIconList'
 import InputBtn from '../cmps/InputBtn'
-import InfoCube from '../cmps/info-cube/InfoCube'
 import InfoCubeList, { infoCubeProp } from '../cmps/info-cube/InfoCubeList'
+import { Ride } from '../types/ride-types'
+import RideInfo from '../cmps/info-cube/RideInfo'
 
 const RidesIndex = () => {
   const [pin, setPin] = useState('')
@@ -23,15 +24,57 @@ const RidesIndex = () => {
     },
   ]
 
-  const infoCubes: infoCubeProp[] = [
-    { children: <h1>helkofkosd</h1>, color: 'red' },
-    { children: <h1>helkofkosd</h1>, color: 'red' },
-    { children: <h1>helkofkosd</h1>, color: 'red' },
-    { children: <h1>helkofkosd</h1>, color: 'red' },
-    { children: <h1>helkofkosd</h1>, color: 'red' },
-    { children: <h1>helkofkosd</h1>, color: 'red' },
-    { children: <h1>helkofkosd</h1>, color: 'red' },
+  const rides: Ride[] = [
+    {
+      id: 1,
+      zone: {
+        id: 0,
+        color: 'red',
+        name: 'Mandrill Town',
+      },
+      name: 'Big Town Hall Slides',
+      remaining_tickets: 22,
+      return_time: '2024-03-24T09:26:15.629Z',
+    },
+    {
+      id: 2,
+      zone: {
+        id: 0,
+        color: 'blue',
+        name: 'Mandrill Town',
+      },
+      name: 'Big Town Hall Slides',
+      remaining_tickets: 22,
+      return_time: '2024-03-24T09:26:15.629Z',
+    },
+    {
+      id: 3,
+      zone: {
+        id: 0,
+        color: 'yellow',
+        name: 'Mandrill Town',
+      },
+      name: 'Big Town Hall Slides',
+      remaining_tickets: 22,
+      return_time: '2024-03-24T09:26:15.629Z',
+    },
+    {
+      id: 4,
+      zone: {
+        id: 0,
+        color: 'green',
+        name: 'Mandrill Town',
+      },
+      name: 'Big Town Hall Slides',
+      remaining_tickets: 22,
+      return_time: '2024-03-24T09:26:15.629Z',
+    },
   ]
+
+  const infoCubes: infoCubeProp[] = rides.map((ride) => ({
+    children: <RideInfo ride={ride} onClick={(rideId) => {}} />,
+    color: ride.zone.color,
+  }))
 
   const onFormSubmit = (ev: React.FormEvent<HTMLFormElement>): void => {}
 

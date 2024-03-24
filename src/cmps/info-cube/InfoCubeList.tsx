@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import InfoCube from './InfoCube'
 
-export type infoCubeProp = {
+export interface infoCubeProp {
   children: React.ReactNode
   color: string
 }

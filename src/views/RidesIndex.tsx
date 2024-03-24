@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useEffect, useState } from 'react'
+import { ChangeEventHandler, FC, useEffect, useState } from 'react'
 import { InfoIconItemProps } from '../cmps/info-icon/InfoIconItem'
 import InfoIconList from '../cmps/info-icon/InfoIconList'
 import InputBtn from '../cmps/InputBtn'
@@ -6,9 +6,14 @@ import InfoCubeList, { infoCubeProp } from '../cmps/info-cube/InfoCubeList'
 import RideInfo from '../cmps/info-cube/RideInfo'
 import { bookTicket, getRides } from '../services/ride-services'
 import { Ride } from '../types/ride-types'
+import { Ticket } from '../types/ticket-types'
 
-const RidesIndex = () => {
-  const [pin, setPin] = useState<string>('')
+interface RidesIndexProps {
+  setTicket: (ticket: Ticket | null) => void
+}
+
+const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
+  const [pin, setPin] = useState<string>(localStorage.getItem('PIN') || '')
   const [rides, setRides] = useState<null | Ride[]>(null)
   const [infoCubes, setInfoCubes] = useState<null | infoCubeProp[]>(null)
   const [selectedRide, setSelectedRide] = useState<null | number>(null)
@@ -57,13 +62,15 @@ const RidesIndex = () => {
   const onFormSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     try {
       ev.preventDefault()
+      localStorage.setItem('PIN', pin)
       if (!selectedRide) {
         console.log('no selected ride')
         return
       }
 
       const ticket = await bookTicket(selectedRide, pin)
-      console.log('ticket', ticket)
+      localStorage.setItem('ticket', JSON.stringify(ticket))
+      setTicket(ticket)
     } catch (err) {
       console.log('err', err)
     }
@@ -78,21 +85,17 @@ const RidesIndex = () => {
   }
 
   return (
-    <section className="page-layout rides-index">
-      <div className="page-content">
-        <h1 className="page-title">The Jungle™ FastRider Service</h1>
+    <section className="rides-index">
+      <InfoIconList InfoIcons={infoIcons} />
 
-        <InfoIconList InfoIcons={infoIcons} />
+      <InputBtn
+        onChange={onPINChange}
+        onSubmit={onFormSubmit}
+        value={pin}
+        placeholder="#PIN"
+      />
 
-        <InputBtn
-          onChange={onPINChange}
-          onSubmit={onFormSubmit}
-          value={pin}
-          placeholder="#PIN"
-        />
-
-        {infoCubes && <InfoCubeList infoCubes={infoCubes} isHoverable={true} />}
-      </div>
+      {infoCubes && <InfoCubeList infoCubes={infoCubes} isHoverable={true} />}
     </section>
   )
 }

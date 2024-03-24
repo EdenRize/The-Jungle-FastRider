@@ -1,4 +1,5 @@
 import { Ride } from '../types/ride-types'
+import { Ticket } from '../types/ticket-types'
 
 const baseURL = 'http://fast-rider.herokuapp.com/api/v1/'
 const token = '433898df4a3e992b8411004109e4d574a90695e39e'
@@ -18,7 +19,10 @@ export const getRides = async (): Promise<Ride[]> => {
   }
 }
 
-export const bookTicket = async (rideId: number, PIN: string) => {
+export const bookTicket = async (
+  rideId: number,
+  PIN: string
+): Promise<Ticket> => {
   try {
     const formData = new URLSearchParams()
     formData.append('pin', PIN)

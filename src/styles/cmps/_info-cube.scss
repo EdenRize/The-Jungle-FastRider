@@ -21,7 +21,8 @@
     }
   }
 
-  &.selected .top-color {
+  &.selected .top-color,
+  .selected {
     height: 100%;
   }
 

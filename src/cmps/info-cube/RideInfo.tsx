@@ -8,9 +8,7 @@ interface RideInfoProps {
 }
 
 const RideInfo: FC<RideInfoProps> = ({ ride, onClick }) => {
-  const onRideClick = () => {
-    onClick(ride.id)
-  }
+  const onRideClick = () => onClick(ride.id)
 
   return (
     <section className="ride-info" onClick={onRideClick}>

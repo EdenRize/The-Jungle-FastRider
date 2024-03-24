@@ -4,6 +4,7 @@ import InfoCube from './InfoCube'
 export interface infoCubeProp {
   children: React.ReactNode
   color: string
+  isSelected?: boolean
 }
 
 interface InfoCubeListProps {
@@ -20,6 +21,7 @@ const InfoCubeList: FC<InfoCubeListProps> = ({ infoCubes, isHoverable }) => {
           color={cube.color}
           children={cube.children}
           isHoverable={isHoverable}
+          isSelected={cube.isSelected}
         />
       ))}
     </section>

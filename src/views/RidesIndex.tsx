@@ -7,7 +7,8 @@ import { Ride } from '../types/ride-types'
 import RideInfo from '../cmps/info-cube/RideInfo'
 
 const RidesIndex = () => {
-  const [pin, setPin] = useState('')
+  const [pin, setPin] = useState<string>('')
+  const [selectedRide, setSelectedRide] = useState<null | number>(null)
 
   const infoIcons: InfoIconItemProps[] = [
     {
@@ -71,16 +72,21 @@ const RidesIndex = () => {
     },
   ]
 
-  const infoCubes: infoCubeProp[] = rides.map((ride) => ({
-    children: <RideInfo ride={ride} onClick={(rideId) => {}} />,
-    color: ride.zone.color,
-  }))
-
   const onFormSubmit = (ev: React.FormEvent<HTMLFormElement>): void => {}
 
   const onPINChange: ChangeEventHandler<HTMLInputElement> = (ev) => {
     setPin(ev.target.value)
   }
+
+  const onRideClick = (rideId: number) => {
+    setSelectedRide((prevRide) => (prevRide === rideId ? null : rideId))
+  }
+
+  const infoCubes: infoCubeProp[] = rides.map((ride) => ({
+    children: <RideInfo ride={ride} onClick={onRideClick} />,
+    color: ride.zone.color,
+    isSelected: selectedRide === ride.id,
+  }))
 
   return (
     <section className="page-layout rides-index">

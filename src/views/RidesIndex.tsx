@@ -4,7 +4,7 @@ import InfoIconList from '../cmps/info-icon/InfoIconList'
 import InputBtn from '../cmps/InputBtn'
 import InfoCubeList, { infoCubeProp } from '../cmps/info-cube/InfoCubeList'
 import RideInfo from '../cmps/info-cube/RideInfo'
-import { getRides } from '../services/ride-services'
+import { bookTicket, getRides } from '../services/ride-services'
 import { Ride } from '../types/ride-types'
 
 const RidesIndex = () => {
@@ -54,7 +54,20 @@ const RidesIndex = () => {
     },
   ]
 
-  const onFormSubmit = (ev: React.FormEvent<HTMLFormElement>): void => {}
+  const onFormSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+    try {
+      ev.preventDefault()
+      if (!selectedRide) {
+        console.log('no selected ride')
+        return
+      }
+
+      const ticket = await bookTicket(selectedRide, pin)
+      console.log('ticket', ticket)
+    } catch (err) {
+      console.log('err', err)
+    }
+  }
 
   const onPINChange: ChangeEventHandler<HTMLInputElement> = (ev) => {
     setPin(ev.target.value)

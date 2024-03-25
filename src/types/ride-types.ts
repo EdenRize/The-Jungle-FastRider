@@ -15,3 +15,7 @@ export interface Ride {
 export enum FastRiderState {
   RIDES = 'rides',
 }
+
+export enum RidesErrorMsgs {
+  LOAD_ERROR = 'Cannot load rides, please try again later',
+}

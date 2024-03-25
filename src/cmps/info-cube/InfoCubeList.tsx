@@ -4,15 +4,20 @@ import InfoCube from './InfoCube'
 export interface infoCubeProp {
   children: React.ReactNode
   color: string
-  isSelected?: boolean
+  id?: number
 }
 
 interface InfoCubeListProps {
+  selectedId: number | null
   infoCubes: infoCubeProp[]
   isHoverable?: boolean
 }
 
-const InfoCubeList: FC<InfoCubeListProps> = ({ infoCubes, isHoverable }) => {
+const InfoCubeList: FC<InfoCubeListProps> = ({
+  infoCubes,
+  isHoverable,
+  selectedId,
+}) => {
   return (
     <section className="info-cube-list">
       {infoCubes.map((cube, idx) => (
@@ -21,7 +26,7 @@ const InfoCubeList: FC<InfoCubeListProps> = ({ infoCubes, isHoverable }) => {
           color={cube.color}
           children={cube.children}
           isHoverable={isHoverable}
-          isSelected={cube.isSelected}
+          isSelected={cube.id === selectedId}
         />
       ))}
     </section>

@@ -5,7 +5,7 @@ import InputBtn from '../cmps/InputBtn'
 import InfoCubeList, { infoCubeProp } from '../cmps/info-cube/InfoCubeList'
 import RideInfo from '../cmps/info-cube/RideInfo'
 import { bookTicket, getRides } from '../services/ride-services'
-import { Ride } from '../types/ride-types'
+import { Ride, RidesErrorMsgs } from '../types/ride-types'
 import { Ticket } from '../types/ticket-types'
 import ErrorMsg from '../cmps/ErrorMsg'
 
@@ -15,7 +15,6 @@ interface RidesIndexProps {
 
 const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
   const [pin, setPin] = useState<string>(localStorage.getItem('PIN') || '')
-  const [rides, setRides] = useState<null | Ride[]>(null)
   const [infoCubes, setInfoCubes] = useState<null | infoCubeProp[]>(null)
   const [selectedRide, setSelectedRide] = useState<null | number>(null)
   const [isShowBtn, setIsShowBtn] = useState(false)
@@ -30,10 +29,6 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
     }
   }, [])
 
-  useEffect(() => {
-    if (rides) updateInfoCubes(rides)
-  }, [rides, selectedRide])
-
   const handleScroll = () => {
     if (!infoCubeListRef.current) return
     const rect = infoCubeListRef.current.getBoundingClientRect()
@@ -46,9 +41,9 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
   const loadRides = async () => {
     try {
       const rides = await getRides()
-      setRides(rides)
+      updateInfoCubes(rides)
     } catch (err) {
-      setErrorMsg('Cannot load rides, please try again later')
+      setErrorMsg(RidesErrorMsgs.LOAD_ERROR)
     }
   }
 
@@ -56,7 +51,7 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
     const cubes = rides.map((ride) => ({
       children: <RideInfo ride={ride} onClick={onRideClick} />,
       color: ride.zone.color,
-      isSelected: selectedRide === ride.id,
+      id: ride.id,
     }))
     setInfoCubes(cubes)
   }
@@ -90,6 +85,7 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
       setTicket(ticket)
     } catch (err: any) {
       if (err && typeof err.message === 'string') setErrorMsg(err.message)
+      else setErrorMsg(RidesErrorMsgs.LOAD_ERROR)
     }
   }
 
@@ -114,7 +110,13 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
       />
 
       <div ref={infoCubeListRef}>
-        {infoCubes && <InfoCubeList infoCubes={infoCubes} isHoverable={true} />}
+        {infoCubes && (
+          <InfoCubeList
+            selectedId={selectedRide}
+            infoCubes={infoCubes}
+            isHoverable={true}
+          />
+        )}
       </div>
 
       <ErrorMsg msg={errorMsg} setMsg={setErrorMsg} />

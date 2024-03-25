@@ -14,24 +14,20 @@ const FastRider = () => {
   }, [])
 
   const checkAndRemoveExpiredTicket = () => {
-    try {
-      const ticketString = localStorage.getItem('ticket')
-      if (!ticketString) {
-        setTicket(FastRiderState.RIDES)
-        return
-      }
-
-      const ticket = JSON.parse(ticketString)
-      const returnTime = new Date(ticket.return_time).getTime()
-      const currentTime = Date.now()
-
-      if (currentTime >= returnTime) {
-        localStorage.removeItem('ticket')
-        setTicket(FastRiderState.RIDES)
-      } else setTicket(ticket)
-    } catch (error) {
-      console.error('Error checking ticket:', error)
+    const ticketString = localStorage.getItem('ticket')
+    if (!ticketString) {
+      setTicket(FastRiderState.RIDES)
+      return
     }
+
+    const ticket = JSON.parse(ticketString)
+    const returnTime = new Date(ticket.return_time).getTime()
+    const currentTime = Date.now()
+
+    if (currentTime >= returnTime) {
+      localStorage.removeItem('ticket')
+      setTicket(FastRiderState.RIDES)
+    } else setTicket(ticket)
   }
 
   return (

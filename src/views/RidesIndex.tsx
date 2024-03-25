@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC, useEffect, useState } from 'react'
+import { ChangeEventHandler, FC, useEffect, useRef, useState } from 'react'
 import { InfoIconItemProps } from '../cmps/info-icon/InfoIconItem'
 import InfoIconList from '../cmps/info-icon/InfoIconList'
 import InputBtn from '../cmps/InputBtn'
@@ -17,6 +17,8 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
   const [rides, setRides] = useState<null | Ride[]>(null)
   const [infoCubes, setInfoCubes] = useState<null | infoCubeProp[]>(null)
   const [selectedRide, setSelectedRide] = useState<null | number>(null)
+  const [isShowBtn, setIsShownBtn] = useState(false)
+  const infoCubeListRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     loadRides()
@@ -25,6 +27,22 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
   useEffect(() => {
     if (rides) updateInfoCubes(rides)
   }, [rides, selectedRide])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!infoCubeListRef.current) return
+      const rect = infoCubeListRef.current.getBoundingClientRect()
+      if (rect.top <= 10) {
+        setIsShownBtn(true)
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   const loadRides = async () => {
     try {
@@ -93,9 +111,12 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
         onSubmit={onFormSubmit}
         value={pin}
         placeholder="#PIN"
+        isShowBtn={isShowBtn}
       />
 
-      {infoCubes && <InfoCubeList infoCubes={infoCubes} isHoverable={true} />}
+      <div ref={infoCubeListRef}>
+        {infoCubes && <InfoCubeList infoCubes={infoCubes} isHoverable={true} />}
+      </div>
     </section>
   )
 }

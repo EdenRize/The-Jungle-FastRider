@@ -7,6 +7,7 @@ interface InputBtnProps {
   placeholder?: string
   type?: 'text' | 'number'
   btnLabel?: string
+  isShowBtn?: boolean
 }
 
 const InputBtn: FC<InputBtnProps> = ({
@@ -16,6 +17,7 @@ const InputBtn: FC<InputBtnProps> = ({
   value,
   placeholder,
   btnLabel = 'SUBMIT',
+  isShowBtn = true,
 }) => {
   const onFormSubmit = (ev: React.FormEvent<HTMLFormElement>): void => {
     ev.preventDefault()
@@ -32,7 +34,7 @@ const InputBtn: FC<InputBtnProps> = ({
         onChange={onChange}
       />
 
-      <button>{btnLabel}</button>
+      <button className={`${isShowBtn ? 'shown' : ''}`}>{btnLabel}</button>
     </form>
   )
 }

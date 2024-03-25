@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react'
 import RidesIndex from './RidesIndex'
 import { Ticket } from '../types/ticket-types'
 import TicketIndex from './TicketIndex'
+import { FastRiderState } from '../types/ride-types'
 
 const FastRider = () => {
-  const [ticket, setTicket] = useState<null | Ticket>(null)
+  const [ticket, setTicket] = useState<null | Ticket | FastRiderState.RIDES>(
+    null
+  )
 
   useEffect(() => {
     checkAndRemoveExpiredTicket()
@@ -14,7 +17,7 @@ const FastRider = () => {
     try {
       const ticketString = localStorage.getItem('ticket')
       if (!ticketString) {
-        console.log('No ticket found in local storage')
+        setTicket(FastRiderState.RIDES)
         return
       }
 
@@ -24,11 +27,8 @@ const FastRider = () => {
 
       if (currentTime >= returnTime) {
         localStorage.removeItem('ticket')
-        console.log('Expired ticket removed from local storage')
-      } else {
-        console.log('ticket', ticket)
-        setTicket(ticket)
-      }
+        setTicket(FastRiderState.RIDES)
+      } else setTicket(ticket)
     } catch (error) {
       console.error('Error checking ticket:', error)
     }
@@ -39,10 +39,14 @@ const FastRider = () => {
       <div className="page-content">
         <h1 className="page-title">The Jungle™ FastRider Service</h1>
 
-        {ticket ? (
-          <TicketIndex ticket={ticket} />
-        ) : (
-          <RidesIndex setTicket={setTicket} />
+        {ticket && (
+          <>
+            {ticket === FastRiderState.RIDES ? (
+              <RidesIndex setTicket={setTicket} />
+            ) : (
+              <TicketIndex ticket={ticket} />
+            )}
+          </>
         )}
       </div>
     </section>

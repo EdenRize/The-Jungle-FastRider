@@ -11,3 +11,7 @@ export interface Ride {
   remaining_tickets: number
   return_time: string
 }
+
+export enum FastRiderState {
+  RIDES = 'rides',
+}

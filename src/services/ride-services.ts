@@ -23,6 +23,7 @@ export const bookTicket = async (
   PIN: string
 ): Promise<Ticket> => {
   try {
+    if (!_validatePIN(PIN)) throw new Error('Invalid PIN')
     const formData = new URLSearchParams()
     formData.append('pin', PIN)
     formData.append('ride_id', rideId.toString())
@@ -47,4 +48,46 @@ export const bookTicket = async (
   } catch (err) {
     throw err
   }
+}
+const _validatePIN = (PIN: string) => {
+  const splittedPIN = PIN.split('-')
+
+  if (!_validatePINSyntax(splittedPIN)) return false
+
+  const firstASCII = getNumericGroupASCII(splittedPIN[1])
+  const secondASCII = getNumericGroupASCII(splittedPIN[2])
+
+  if (splittedPIN[3][0] !== firstASCII || splittedPIN[3][1] !== secondASCII)
+    return false
+
+  return true
+}
+
+const getNumericGroupASCII = (group: string) => {
+  const groupSum = group.split('').reduce((acc, currNumber, idx) => {
+    const isEven = (idx + 1) % 2 === 0
+    let calcNumber = isEven ? +currNumber * 2 : +currNumber
+    if (calcNumber > 9) {
+      const numberStringify = calcNumber.toString()
+      calcNumber = +numberStringify[0] + +numberStringify[1]
+    }
+    acc += calcNumber
+    return acc
+  }, 0)
+
+  return String.fromCharCode((groupSum % 26) + 65)
+}
+
+const _validatePINSyntax = (splittedPIN: string[]) => {
+  return (
+    splittedPIN.length === 4 &&
+    splittedPIN[0].length === 2 &&
+    splittedPIN[3].length === 2 &&
+    splittedPIN[1].length === 4 &&
+    splittedPIN[2].length === 4 &&
+    splittedPIN[0].match(/^[A-Z]{2}$/) &&
+    splittedPIN[3].match(/^[A-Z]{2}$/) &&
+    !isNaN(+splittedPIN[1]) &&
+    !isNaN(+splittedPIN[2])
+  )
 }

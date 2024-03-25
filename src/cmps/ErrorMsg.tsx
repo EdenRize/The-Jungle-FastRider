@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 interface ErrorMsgProps {
   msg?: string
@@ -8,11 +8,14 @@ interface ErrorMsgProps {
 
 const ErrorMsg: FC<ErrorMsgProps> = ({ msg, setMsg, showTime = 2500 }) => {
   const [currMsg, setCurrMsg] = useState<string>('')
+  const timeOutId = useRef<number | undefined>()
+
   useEffect(() => {
     if (msg) {
+      clearTimeout(timeOutId.current)
       setCurrMsg(msg)
 
-      setTimeout(() => {
+      timeOutId.current = setTimeout(() => {
         setMsg('')
       }, showTime)
     }

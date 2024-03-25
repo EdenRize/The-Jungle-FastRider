@@ -1,0 +1,14 @@
+.error-msg {
+  position: fixed;
+  top: -80px;
+  left: 50%;
+  translate: -50%;
+  background-color: rgb(231, 111, 104);
+  padding: 15px 20px;
+  border-radius: 4px;
+  transition: 0.2s;
+
+  &.shown {
+    top: 20px;
+  }
+}

@@ -38,14 +38,13 @@ export const bookTicket = async (
     })
 
     if (!response.ok) {
-      console.log('response', response)
-      throw new Error('Failed to book ticket')
+      const error = await response.json()
+      throw new Error(error.message)
     }
 
     const ticketData = await response.json()
     return ticketData
   } catch (err) {
-    console.log('err', err)
     throw err
   }
 }

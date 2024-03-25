@@ -13,7 +13,6 @@ export const getRides = async (): Promise<Ride[]> => {
     const ridesData = await response.json()
     return ridesData
   } catch (err) {
-    console.log('err', err)
     throw err
   }
 }

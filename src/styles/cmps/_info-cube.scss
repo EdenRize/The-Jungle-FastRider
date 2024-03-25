@@ -15,7 +15,7 @@
   }
 
   @include for-desktop-layout {
-    &:hover .top-color {
+    &:hover .top-color.hoverable {
       height: 100%;
     }
   }

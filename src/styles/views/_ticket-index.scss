@@ -13,4 +13,17 @@
       }
     }
   }
+
+  @include for-desktop-layout {
+    font-size: 20px;
+    margin-block-start: 30px;
+    max-width: 48%;
+
+    .info-icon-item {
+      margin-block-end: 50px;
+
+      p {
+      }
+    }
+  }
 }

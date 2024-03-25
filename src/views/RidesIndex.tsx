@@ -22,27 +22,24 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
 
   useEffect(() => {
     loadRides()
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   useEffect(() => {
     if (rides) updateInfoCubes(rides)
   }, [rides, selectedRide])
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!infoCubeListRef.current) return
-      const rect = infoCubeListRef.current.getBoundingClientRect()
-      if (rect.top <= 10) {
-        setIsShownBtn(true)
-        window.removeEventListener('scroll', handleScroll)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => {
+  const handleScroll = () => {
+    if (!infoCubeListRef.current) return
+    const rect = infoCubeListRef.current.getBoundingClientRect()
+    if (rect.top <= 100) {
+      setIsShownBtn(true)
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }
 
   const loadRides = async () => {
     try {

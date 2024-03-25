@@ -4,4 +4,8 @@
   .input-btn {
     margin-block-end: 15px;
   }
+
+  @include for-desktop-layout {
+    margin-block-end: unset;
+  }
 }

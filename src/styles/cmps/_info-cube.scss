@@ -14,7 +14,7 @@
     z-index: 0;
   }
 
-  @include for-normal-layout {
+  @include for-desktop-layout {
     &:hover .top-color {
       height: 100%;
     }

@@ -12,7 +12,7 @@ const InfoIconItem: FC<InfoIconItemProps> = ({ iconPath, text }) => {
         <img src={iconPath} />
       </div>
 
-      <p>{text}</p>
+      <p className="bold">{text}</p>
     </section>
   )
 }

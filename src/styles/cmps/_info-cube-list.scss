@@ -2,10 +2,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  width: 100%;
 
   .info-cube {
     aspect-ratio: 1/1;
     height: 100%;
+  }
+
+  @include for-desktop-layout {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

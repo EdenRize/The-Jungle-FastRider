@@ -18,7 +18,6 @@
 
 
 <img width="600px" src="https://res.cloudinary.com/dkvliixzt/image/upload/v1711449550/Screenshot_2024-03-26_123900_kujg19.png" />
-<img width="600px"  src="https://res.cloudinary.com/dkvliixzt/image/upload/v1711449576/Screenshot_2024-03-26_123926_dacas8.png" />
 <img width="600px"  src="https://res.cloudinary.com/dkvliixzt/image/upload/v1711450012/Screenshot_2024-03-26_124642_kd7buu.png" />
 <hr />
 

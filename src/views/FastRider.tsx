@@ -3,6 +3,7 @@ import RidesIndex from './RidesIndex'
 import { Ticket } from '../types/ticket-types'
 import TicketIndex from './TicketIndex'
 import { FastRiderState } from '../types/ride-types'
+import { LocalStorageKeys } from '../services/util-services'
 
 const FastRider = () => {
   const [ticket, setTicket] = useState<null | Ticket | FastRiderState.RIDES>(
@@ -14,7 +15,7 @@ const FastRider = () => {
   }, [])
 
   const checkAndRemoveExpiredTicket = () => {
-    const ticketString = localStorage.getItem('ticket')
+    const ticketString = localStorage.getItem(LocalStorageKeys.TICKET)
     if (!ticketString) {
       setTicket(FastRiderState.RIDES)
       return
@@ -25,7 +26,7 @@ const FastRider = () => {
     const currentTime = Date.now()
 
     if (currentTime >= returnTime) {
-      localStorage.removeItem('ticket')
+      localStorage.removeItem(LocalStorageKeys.TICKET)
       setTicket(FastRiderState.RIDES)
     } else setTicket(ticket)
   }

@@ -8,6 +8,7 @@ import { bookTicket, getRides } from '../services/ride-services'
 import { Ride, RidesErrorMsgs } from '../types/ride-types'
 import { Ticket } from '../types/ticket-types'
 import ErrorMsg from '../cmps/ErrorMsg'
+import { LocalStorageKeys } from '../services/util-services'
 
 interface RidesIndexProps {
   setTicket: (ticket: Ticket | null) => void
@@ -81,7 +82,7 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
       }
 
       const ticket = await bookTicket(selectedRide, pin)
-      localStorage.setItem('ticket', JSON.stringify(ticket))
+      localStorage.setItem(LocalStorageKeys.TICKET, JSON.stringify(ticket))
       setTicket(ticket)
     } catch (err: any) {
       if (err && typeof err.message === 'string') setErrorMsg(err.message)

@@ -4,3 +4,7 @@ export const formatTimeString = (timeString: string): string => {
   const minutes = date.getUTCMinutes().toString().padStart(2, '0')
   return `${hours}:${minutes}`
 }
+
+export enum LocalStorageKeys {
+  TICKET = 'ticket',
+}

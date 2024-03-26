@@ -1,6 +1,8 @@
 import { FC } from 'react'
 import { Ride } from '../../types/ride-types'
 import { formatTimeString } from '../../services/util-services'
+import clockDisabledSvg from '../../assets/icons/clock-disabled.svg'
+import ticketDisabledSvg from '../../assets/icons/ticket-disabled.svg'
 
 interface RideInfoProps {
   ride: Ride
@@ -17,11 +19,11 @@ const RideInfo: FC<RideInfoProps> = ({ ride, onClick }) => {
 
       <div className="booking-info flex align-center space-between">
         <div className="flex align-center justify-center">
-          <img src="src/assets/icons/clock-disabled.svg" />
+          <img src={clockDisabledSvg} alt="Clock" />
           <p className="bold">{formatTimeString(ride.return_time)}</p>
         </div>
         <div className="flex align-center justify-center">
-          <img src="src/assets/icons/ticket-disabled.svg" />
+          <img src={ticketDisabledSvg} alt="Ticket" />
           <p className="bold">{ride.remaining_tickets}</p>
         </div>
       </div>

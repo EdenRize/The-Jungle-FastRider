@@ -1,7 +1,7 @@
 import { Ride } from '../types/ride-types'
 import { Ticket } from '../types/ticket-types'
 
-const BASE_URL = 'http://fast-rider.herokuapp.com/api/v1/'
+const BASE_URL = 'https://fast-rider.herokuapp.com/api/v1/'
 const TOKEN = '433898df4a3e992b8411004109e4d574a90695e39e'
 
 export const getRides = async (): Promise<Ride[]> => {

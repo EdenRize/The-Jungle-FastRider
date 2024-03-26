@@ -3,6 +3,7 @@ import { Ticket } from '../types/ticket-types'
 import InfoIconItem from '../cmps/info-icon/InfoIconItem'
 import InfoCube from '../cmps/info-cube/InfoCube'
 import TicketInfo from '../cmps/info-cube/TicketInfo'
+import confirmSvg from '../assets/icons/confirm.svg'
 
 interface TicketIndexProps {
   ticket: Ticket
@@ -12,7 +13,7 @@ const TicketIndex: FC<TicketIndexProps> = ({ ticket }) => {
   return (
     <section className="ticket-index">
       <InfoIconItem
-        iconPath="src/assets/icons/confirm.svg"
+        iconPath={confirmSvg}
         text="Thank you for using The Jungle™ FastRider ticket system - your access code is now ready!"
       />
 

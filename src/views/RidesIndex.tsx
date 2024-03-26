@@ -9,6 +9,9 @@ import { Ride, RidesErrorMsgs } from '../types/ride-types'
 import { Ticket } from '../types/ticket-types'
 import ErrorMsg from '../cmps/ErrorMsg'
 import { LocalStorageKeys } from '../services/util-services'
+import ticketSvg from '../assets/icons/ticket.svg'
+import arrowSvg from '../assets/icons/arrow.svg'
+import clockSvg from '../assets/icons/clock.svg'
 
 interface RidesIndexProps {
   setTicket: (ticket: Ticket | null) => void
@@ -21,6 +24,21 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
   const [isShowBtn, setIsShowBtn] = useState(false)
   const [errorMsg, setErrorMsg] = useState<string>('')
   const infoCubeListRef = useRef<HTMLDivElement>(null)
+
+  const infoIcons: InfoIconItemProps[] = [
+    {
+      iconPath: ticketSvg,
+      text: 'Enter your park ticket #PIN number, then select the desired ride while noting the stated return time',
+    },
+    {
+      iconPath: arrowSvg,
+      text: 'Press ʻsubmitʻ to confirm and retrieve your access code',
+    },
+    {
+      iconPath: clockSvg,
+      text: 'When the time comes, use the special FastRider line to cut out a considerable wait time',
+    },
+  ]
 
   useEffect(() => {
     loadRides()
@@ -56,21 +74,6 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
     }))
     setInfoCubes(cubes)
   }
-
-  const infoIcons: InfoIconItemProps[] = [
-    {
-      iconPath: 'src/assets/icons/ticket.svg',
-      text: 'Enter your park ticket #PIN number, then select the desired ride while noting the stated return time',
-    },
-    {
-      iconPath: 'src/assets/icons/arrow.svg',
-      text: 'Press ʻsubmitʻ to confirm and retrieve your access code',
-    },
-    {
-      iconPath: 'src/assets/icons/clock.svg',
-      text: 'When the time comes, use the special FastRider line to cut out a considerable wait time',
-    },
-  ]
 
   const onFormSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     try {

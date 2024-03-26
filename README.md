@@ -8,7 +8,7 @@
   
 * [Getting Started](#start)
   
-* [Myday Description](#desc)
+* [The Jungle™ FastRider Description](#desc)
   
 * [Author](#author)
 <hr />

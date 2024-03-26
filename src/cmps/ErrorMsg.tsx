@@ -6,7 +6,7 @@ interface ErrorMsgProps {
   showTime?: number
 }
 
-const ErrorMsg: FC<ErrorMsgProps> = ({ msg, setMsg, showTime = 2500 }) => {
+const ErrorMsg: FC<ErrorMsgProps> = ({ msg, setMsg, showTime = 3000 }) => {
   const [currMsg, setCurrMsg] = useState<string>('')
   const timeOutId = useRef<number | undefined>()
 

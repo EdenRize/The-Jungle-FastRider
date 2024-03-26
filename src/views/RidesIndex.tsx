@@ -12,6 +12,8 @@ import { LocalStorageKeys } from '../services/util-services'
 import ticketSvg from '../assets/icons/ticket.svg'
 import arrowSvg from '../assets/icons/arrow.svg'
 import clockSvg from '../assets/icons/clock.svg'
+import LottieAnimation from '../cmps/Loader'
+import LoaderAnimation from '../assets/loaders/loader.json'
 
 interface RidesIndexProps {
   setTicket: (ticket: Ticket | null) => void
@@ -114,12 +116,14 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
       />
 
       <div ref={infoCubeListRef}>
-        {infoCubes && (
+        {infoCubes ? (
           <InfoCubeList
             selectedId={selectedRide}
             infoCubes={infoCubes}
             isHoverable={true}
           />
+        ) : (
+          <LottieAnimation animationData={LoaderAnimation} />
         )}
       </div>
 

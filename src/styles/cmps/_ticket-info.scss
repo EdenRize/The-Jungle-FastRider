@@ -8,4 +8,11 @@
   .details-container .info {
     font-size: 22px;
   }
+
+  .ride-name {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
 }

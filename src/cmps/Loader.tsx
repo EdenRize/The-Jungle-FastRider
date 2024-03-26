@@ -1,29 +1,11 @@
-import { useRef, useEffect, FC } from 'react'
-import Lottie from 'lottie-web'
+import loader from '../assets/loaders/loader.gif'
 
-interface LottieProps {
-  animationData: any
+const Loader = () => {
+  return (
+    <section className="flex align-center justify-center loader">
+      <img src={loader} />
+    </section>
+  )
 }
 
-const LottieAnimation: FC<LottieProps> = ({ animationData }) => {
-  const lottieContainer = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (lottieContainer.current) {
-      Lottie.loadAnimation({
-        container: lottieContainer.current,
-        renderer: 'svg', // Choose renderer: svg, canvas, html
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-          className: 'lottie-svg-class',
-        },
-      })
-    }
-  }, [animationData])
-
-  return <div className="lottie" ref={lottieContainer}></div>
-}
-
-export default LottieAnimation
+export default Loader

@@ -12,8 +12,7 @@ import { LocalStorageKeys } from '../services/util-services'
 import ticketSvg from '../assets/icons/ticket.svg'
 import arrowSvg from '../assets/icons/arrow.svg'
 import clockSvg from '../assets/icons/clock.svg'
-import LottieAnimation from '../cmps/Loader'
-import LoaderAnimation from '../assets/loaders/loader.json'
+import Loader from '../cmps/Loader'
 
 interface RidesIndexProps {
   setTicket: (ticket: Ticket | null) => void
@@ -123,7 +122,7 @@ const RidesIndex: FC<RidesIndexProps> = ({ setTicket }) => {
             isHoverable={true}
           />
         ) : (
-          <LottieAnimation animationData={LoaderAnimation} />
+          <Loader />
         )}
       </div>
 
